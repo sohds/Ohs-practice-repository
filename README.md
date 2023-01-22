@@ -12,4 +12,4 @@ print('Hello Python World!')
 사용 언어 : Python   
 진행 중인 문제 : 프로그래머스 스쿨 - 코딩테스트 연습 - 코딩테스트 입문 문제   
 문제 풀이 코드 커밋 메세지 양식: [날짜] 문제 풀이 결과 및 문제명   
-Ex. [23.01.22] success / not solving / solving - day nn   
+Ex. [23.01.22] successfully solved / solving - day nn   
