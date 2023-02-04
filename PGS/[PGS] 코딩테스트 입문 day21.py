@@ -21,15 +21,34 @@ def solution(my_string):
 
 
 
-# 안전지대 (+)
+# 안전지대 (+5)
 # 문제 설명 : 다음 그림과 같이 지뢰가 있는 지역과 지뢰에 인접한 위, 아래, 좌, 우 대각선 칸을 모두 위험지역으로 분류합니다.
 # (그림 설명; 9x9 모눈이 있으면 가운데에 폭탄이 있고 나머지 부분에 X표 표시처리가 된 모습)
 # 지뢰는 2차원 배열 board에 1로 표시되어 있고 board에는 지뢰가 매설 된 지역 1과, 지뢰가 없는 지역 0만 존재합니다.
 # 지뢰가 매설된 지역의 지도 board가 매개변수로 주어질 때, 안전한 지역의 칸 수를 return하도록 solution 함수를 완성해주세요.
 
+import numpy as np
+from collections import Counter
+
+def solution(board):
+    n = len(board)
+    # pad() 함수를 사용해 주어진 2차원 배열의 상하좌우 1줄씩 -1을 추가한 board_padded 생성
+    board_padded = np.pad(board, ((1, 1), (1, 1)), constant_values = -1)
+    danger_array = np.pad(board, ((1, 1), (1, 1)), constant_values = -1)
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            if board_padded[i][j] == 1:
+                for x in range(i-1, i+2):
+                    for y in range(j-1, j+2):
+                        danger_array[x][y] = 1
+    danger_list = danger_array.reshape(1, -1).squeeze()
+    answer = Counter(danger_list)[0]
+    # 결과 값 반환
+    return answer
+
 # https://velog.io/@seulki971227/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-Lv.0-%EC%95%88%EC%A0%84%EC%A7%80%EB%8C%80-Python
-# 지금 내 수준에서는 절대 못 풀 것 같다.. 나는 개발자 신생아 수준인 것 같다..
-# 내일 맑은 정신에 다시...
+# 지금 내 수준에서는 절대 못 풀 것 같다.. 나는 개발자 신생아 수준인 것 같다.. 이게 어떻게 레벨 0에 5점짜리 문제지? 차라리 유한소수가 쉬움
+# 내일 TIL에서 재도전... 다른 사람의 풀이랑 저 링크 타고 들어가서 재도전!
 
 
 # 삼각형의 완성조건(2) (+1)
