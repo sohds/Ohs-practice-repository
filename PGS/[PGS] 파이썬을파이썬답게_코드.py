@@ -298,3 +298,105 @@ print(answer[100]) # = 0
 # 제한 조건 : mylist는 길이가 100이하인 배열입니다. mylist의 원소는 1이상 100 이하인 정수입니다.
 def solution(mylist):
     return [ i**2 for i in mylist if i%2==0 ]
+
+
+
+# flag OR else
+# 문제 설명 : 본 문제에서는 자연수 5개가 주어집니다. 숫자를 차례로 곱해 나온 수가 제곱수1가 되면 found를 출력하고
+# 모든 수를 곱해도 제곱수가 나오지 않았다면 not found를 출력하는 코드를 작성해주세요.
+
+import math
+
+if __name__ == '__main__':
+    numbers = [int(input()) for _ in range(5)]
+    multiplied = 1
+    for number in numbers:
+        multiplied *= number
+        if math.sqrt(multiplied) == int(math.sqrt(multiplied)):
+            print('found')
+            break
+    else:
+        print('not found')
+        
+
+
+# 두 변수의 값 바꾸기 - swap
+# 두 변수의 값을 바꾸는 방법 ( swap이라고 하지요 )
+# 예시) a = 3, b = 'abc'를 a = 'abc', b = 3 으로 바꾸기
+a = 3
+b = 'abc'
+
+a, b = b, a
+
+
+
+# 이진 탐색하기 - binary search
+# 이진 탐색 모듈 bisect
+import bisect
+mylist = [1, 2, 3, 7, 9, 11, 33]
+print(bisect.bisect(mylist, 3))
+# bisect.bisect(mylist, n)의 n은 mylist에서 찾고자하는 값입니다.
+# 리턴하는 값 = mylist에서 n이 위치한 index의 오른쪽 값 (+1)
+
+
+# index 함수는 이진 탐색이 아닌 선형 탐색 함수입니다.
+# (물론 주어진 input에 대해서 index 함수를 쓰면 정확한 output 값을 얻을 수 있긴 합니다.)
+
+# 이진탐색의 시간복잡도는 O(logN) 이나,
+# index 함수는 선형탐색을 하므로 시간복잡도가 O(N)이라 시간이 오래 걸립니다.
+
+
+# 기존 Binary Search는 찾고자 하는 key 값이 발견되지 않으면 -1을 리턴하지만
+# bisect 모듈들은 key값이 없으면 해당 key값이 들어갈 위치를 반환.
+# 따라서, 이진탐색 목적으로 사용 할 경우에는 아래와 같이 따로 추가적인 구현이 필요
+import bisect
+def b_s(ary,key):
+    i= bisect.bisect(ary,key)
+    return i-1 if ary[i-1]==key else -1
+
+
+# 클래스 인스턴스 출력하기 - class의 자동 string casting
+# 이번 강의에서는 인스턴스 출력 형식을 지정하는 방법을 배워봅시다.
+# 예) 2차원 평면 위의 점을 나타내는 Coord 클래스의 인스턴스를 (x 값, y 값)으로 출력하기
+# 파이썬에서는 __str__ 메소드를 사용해 class 내부에서 출력 format을 지정할 수 있습니다.
+class Coord(object):
+    def __init__ (self, x, y):
+        self.x, self.y = x, y
+    def __str__ (self):
+        return '({}, {})'.format(self.x, self.y)
+
+point = Coord(1, 2)
+
+
+
+# 본인이 생각하는 임의의 큰 수(99999등)를 할당합니다.
+min_val = 99999
+min_val > 100000000 # ?
+
+# 파이썬에서는 위 방법은 비교할 데이터가 아주 큰 경우, 정상 작동하지 않을 수 있습니다. (min_val과 10000000000을 비교하는 상황을 생각해보세요!)
+# 파이썬이 제공하는 inf 를 사용해보세요. inf는 어떤 숫자와 비교해도 무조건 크다고 판정됩니다.
+min_val = float('inf')
+min_val > 10000000000
+# inf에는 음수 기호를 붙이는 것도 가능합니다.
+
+max_val = float('-inf')
+
+
+
+# 파일 입출력 코드를 간결하게 짜는 법을 알아봅시다.
+# 'myfile.txt'라는 이름의 파일을 읽는 코드
+f = open('myfile.txt', 'r')
+while True:
+    line = f.readline()
+    if not line: 
+        break
+    raw = line.split()
+    print(raw)
+f.close()
+
+# 파이썬의 with - as 구문을 이용하면 코드를 더 간결하게 짤 수 있습니다. 코드를 아래와 같이 쓰면 다음과 같은 장점이 있습니다.
+# 파일을 close 하지 않아도 됩니다: with - as 블록이 종료되면 파일이 자동으로 close 됩니다.
+# readlines가 EOF까지만 읽으므로, while 문 안에서 EOF를 체크할 필요가 없습니다.
+with open('myfile.txt') as file:
+    for line in file.readlines():
+        print(line.strip().split('\t'))
