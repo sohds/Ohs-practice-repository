@@ -126,3 +126,77 @@ def solution(arr, k):
             break
 
     return ret + [-1] * (k - len(ret))
+
+
+
+### 96. 배열의 길이를 2의 거듭제곱으로 만들기     (+3)
+## 문제 설명
+## 정수 배열 arr이 매개변수로 주어집니다. arr의 길이가 2의 정수 거듭제곱이 되도록 arr 뒤에 정수 0을 추가하려고 합니다. 
+## arr에 최소한의 개수로 0을 추가한 배열을 return 하는 solution 함수를 작성해 주세요.
+def solution(arr):
+    length = [ 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 ]
+    diff = list(map(lambda x: x-len(arr), length))
+    
+    for i in range(len(diff)):
+        if diff[i] >= 0:
+            diff_arr = diff[i]
+            return arr + [0] * diff_arr
+        
+        
+
+### 97. 배열 비교하기       (+1)
+## 문제 설명
+## 이 문제에서 두 정수 배열의 대소관계를 다음과 같이 정의합니다.
+
+## 두 배열의 길이가 다르다면, 배열의 길이가 긴 쪽이 더 큽니다.
+## 배열의 길이가 같다면 각 배열에 있는 모든 원소의 합을 비교하여 다르다면 더 큰 쪽이 크고, 같다면 같습니다.
+## 두 정수 배열 arr1과 arr2가 주어질 때, 위에서 정의한 배열의 대소관계에 대하여 arr2가 크다면 -1, 
+## arr1이 크다면 1, 두 배열이 같다면 0을 return 하는 solution 함수를 작성해 주세요.
+def solution(arr1, arr2):
+    if len(arr1) != len(arr2):
+        if len(arr1) > len(arr2):
+            return 1
+        else:
+            return -1
+    else:
+        if sum(arr1) > sum(arr2):
+            return 1
+        elif sum(arr1) == sum(arr2):
+            return 0
+        else:
+            return -1
+        
+
+
+### 98. 문자열 묶기     (+2)
+## 문제 설명
+## 문자열 배열 strArr이 주어집니다. 
+## strArr의 원소들을 길이가 같은 문자열들끼리 그룹으로 묶었을 때 가장 개수가 많은 그룹의 크기를 return 하는 solution 함수를 완성해 주세요.
+def solution(strArr):
+    answer = [len(i) for i in strArr]
+    tmp = []
+    for i in set(answer):
+        tmp.append(answer.count(i))
+    
+    return max(tmp)
+
+
+
+### 99. 배열의 길이에 따라 다른 연산하기      (+1)
+## 문제 설명
+## 정수 배열 arr과 정수 n이 매개변수로 주어집니다. arr의 길이가 홀수라면 arr의 모든 짝수 인덱스 위치에 n을 더한 배열을, 
+## arr의 길이가 짝수라면 arr의 모든 홀수 인덱스 위치에 n을 더한 배열을 return 하는 solution 함수를 작성해 주세요.
+def solution(arr, n):
+    if len(arr) % 2 == 0:
+        return [ arr[idx]+n if idx % 2 == 1 else arr[idx] for idx in range(len(arr)) ]
+    else:
+        return [ arr[idx]+n if idx % 2 == 0 else arr[idx] for idx in range(len(arr)) ]
+    
+    
+
+### 100. 뒤에서 5등까지       (+1)
+# 문제 설명
+# 정수로 이루어진 리스트 num_list가 주어집니다. 
+# num_list에서 가장 작은 5개의 수를 오름차순으로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+def solution(num_list):    
+    return sorted(num_list)[:5]
